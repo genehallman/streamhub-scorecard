@@ -1,0 +1,11 @@
+{
+  "name": "streamhub-scorecard",
+  "version": "1.0.0",
+  "main": [
+    "./main.css",
+    "./main.js"
+  ],
+  "dependencies": {
+    "streamhub-backbone": "*"
+  }
+}
