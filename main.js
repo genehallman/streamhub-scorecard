@@ -21,12 +21,14 @@ var ScorecardView = Backbone.View.extend(
 ScorecardView.prototype._insertItem = function (item, opts) {
     var json = item.toJSON();
 	console.log(json);
-
+	
 	if (json.event > this.lastEventId) {
 	    var score1 = this.$el.find('.score1');
 	    var score2 = this.$el.find('.score2');
-		try {	
-			var parts = json.bodyHtml.split(' ');
+	    //strip html tags
+	    var text = $(document.createElement('div')).html(json.bodyHtml).text().trim();
+		try {
+			var parts = text.split(' ');
 			if (parts.length >= 3 && parts[0] == "score") {
 				var s1 = parseInt(parts[1]);
 				var s2 = parseInt(parts[2]);
