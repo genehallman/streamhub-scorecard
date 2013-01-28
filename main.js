@@ -11,19 +11,10 @@ var ScorecardView = Backbone.View.extend(
     initialize: function (opts) {
         this._contentViewOpts = opts.contentViewOptions || {};
         this._sourceOpts = opts.sources || {};
-        this.$el.addClass(this.className);
-        this.$el.hide();
         this.lastEventId = 0;
 
         this.collection.on('add', this._insertItem, this);
         this.collection.on('initialDataLoaded', this.render, this);
-    },
-    className: "hub-ScorecardView",
-    score_history: {
-    },
-    render: function () {
-        this.$el.fadeIn();
-        this.$el.prev('.loading-indicator').hide();
     }
 });
 
