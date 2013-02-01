@@ -20,11 +20,12 @@ var ScorecardView = Backbone.View.extend(
 
 ScorecardView.prototype._insertItem = function (item, opts) {
     var json = item.toJSON();
-	console.log(json);
 	
 	if (json.event > this.lastEventId) {
 	    var score1 = this.$el.find('.score1');
 	    var score2 = this.$el.find('.score2');
+	    var quarterEl = this.$el.find('.quarter');
+	    
 	    //strip html tags
 	    var text = $(document.createElement('div')).html(json.bodyHtml).text().trim();
 		try {
@@ -33,9 +34,17 @@ ScorecardView.prototype._insertItem = function (item, opts) {
 				var s1 = parseInt(parts[1]);
 				var s2 = parseInt(parts[2]);
 				var self = this;
+				parts.shift();
+				parts.shift();
+				parts.shift();
+				var quarterText = parts.join(' ');
+				
 				this.$el.fadeOut(function() {
 					score1.html(s1);
 					score2.html(s2);
+					
+					if (quarterText.length = 0) { quarterEl.html(quarterText); }
+					
 					self.$el.fadeIn();
 				});
 				this.lastEventId = json.event;
