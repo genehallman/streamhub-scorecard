@@ -20,7 +20,6 @@ var ScorecardView = Backbone.View.extend(
 
 ScorecardView.prototype._insertItem = function (item, opts) {
     var json = item.toJSON();
-	
 	if (json.event > this.lastEventId) {
 	    var score1 = this.$el.find('.score1');
 	    var score2 = this.$el.find('.score2');
@@ -30,20 +29,18 @@ ScorecardView.prototype._insertItem = function (item, opts) {
 	    var text = $(document.createElement('div')).html(json.bodyHtml).text().trim();
 		try {
 			var parts = text.split(' ');
-			if (parts.length >= 3 && parts[0] == "score") {
-				var s1 = parseInt(parts[1]);
-				var s2 = parseInt(parts[2]);
+			if (parts.length >= 3 && parts.shift() == "score") {
+				var s1 = parseInt(parts.shift());
+				var s2 = parseInt(parts.shift());
 				var self = this;
-				parts.shift();
-				parts.shift();
-				parts.shift();
+				parts.pop(); // popping "date time" from end, for cache busting
 				var quarterText = parts.join(' ');
 				
 				this.$el.fadeOut(function() {
 					score1.html(s1);
 					score2.html(s2);
 					
-					if (quarterText.length = 0) { quarterEl.html(quarterText); }
+					if (quarterText.length != 0) { quarterEl.html(quarterText); }
 					
 					self.$el.fadeIn();
 				});
