@@ -36,7 +36,14 @@ var ScorecardView = Backbone.View.extend(
 
         if (this.collection) {
 	        this.collection.on('add', this._insertItem, this);
-	        this.collection.on('initialDataLoaded', this.render, this);
+	        if (this.collection._initialized) {
+	        	this.collection.each(function(item) {
+	            	self._insertItem(item, self.collection);
+	        	});
+	        	this.render();
+	        } else {
+	        	this.collection.on('initialDataLoaded', this.render, this);
+	        }
         }
     }
 });
@@ -56,7 +63,6 @@ ScorecardView.prototype._insertItem = function (item, col) {
 	    var score1 = this.$el.find('.score1');
 	    var score2 = this.$el.find('.score2');
 	    var quarterEl = this.$el.find('.quarter');
-	    
 	    //strip html tags
 	    var text = $(document.createElement('div')).html(json.bodyHtml).text().trim();
 		try {
@@ -68,14 +74,16 @@ ScorecardView.prototype._insertItem = function (item, col) {
 				var self = this;
 				parts.pop(); // popping "date time" from end, for cache busting
 				var quarterText = parts.join(' ');
+
 				this.$el.stop(true, true);
 				this.$el.fadeOut(function() {
 					score1.html(s1);
 					score2.html(s2);
-					
 					if (quarterText.length != 0) { quarterEl.html(quarterText); }
 					
-					self.$el.fadeIn();
+					self.$el.fadeIn(function() {
+						self.$el.css('opacity', '1');
+					});
 				});
 			}
 		} catch (ex) {

@@ -34,21 +34,47 @@
     	<div class="score2">0</div>
     	<div class="quarter"></div>
     </div>
+    <div>
+      User token: <input id='userToken' value=''></input><br/>
+      Score1: <input id='score1' /><br/>
+      Score2: <input id='score2' /><br/>
+      Quarter: <input id='quarter' /><br/>
+
+  	  <button id='postMessage'>Post</button><br/>
+  	  <span id='status'>NA</span>
+    </div>
+    
   </div>
   <script type="text/javascript">
 	// Now to load the example
 	require(['streamhub-backbone', 'streamhub-scorecard'],
 	function(Hub, View){
 	    function loadApp (sdk) {
-	        var app = window.app = new Hub({
-	            sdk: sdk,
-	            collection: {
-	                siteId: "303827",
-	                articleId: "scoreboard_demo_0"
-	            },
-	            view: View,
+	    	
+	    	var col = window.col = new Hub.Collection().setRemote({
+	    		sdk: sdk,
+                siteId: "303827",
+                articleId: "gene_publish_score_0"
+            });
+	    	
+	        window.scoreboard = new View({
+	            collection: col,
 	            el: document.getElementById("example")
-	        }).start();
+	        });
+	        
+		    $('#postMessage').click(function() {
+		    	$('#status').text('Submitting...');
+		    	var message = ["score", $('#score1').val(), $('#score2').val(), $('#quarter').val(), Date.now()].join(' ');
+		    	col._sdkCollection.setUserToken($('#userToken').val());
+		    	col._sdkCollection.postContent({bodyHtml: message}, function() {
+		    		$('#status').text('Success: ' + JSON.stringify(arguments));
+		    		$('#newMessage').val('');
+		    	}, function() {
+		    		$('#status').text('Failed: ' + JSON.stringify(arguments));
+		    	});
+		    	return false;
+		    });
+
 	    }
 	    fyre.conv.load({
 	        network: "labs-t402.fyre.co"
