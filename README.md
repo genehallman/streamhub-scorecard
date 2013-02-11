@@ -49,9 +49,9 @@ Once you've called bower install, you'll have a suite of components available to
 ```
   ...
   <div id="scorecard">
-  	<div class="score1"></div>
-  	<div class="score2"></div>
-  	<div class="quarter"></div>
+      <div class="score1"></div>
+      <div class="score2"></div>
+      <div class="quarter"></div>
   </div>
   <!-- Get requirejs -->
   <script src="components/requirejs/require.js" type="text/javascript"></script>
@@ -60,34 +60,59 @@ Once you've called bower install, you'll have a suite of components available to
   
   <script type="text/javascript">
 
-  	require.config({
-  		packages: [	{
-  			name: 'streamhub-backbone',
-  			location: 'components/streamhub-backbone'
-  		},
-  		{
-  			name: "streamhub-scorecard",
-  			location: "components/streamhub-scorecard"
-  		}]
-  	});
-  
-  	// Now to load the example
-  	require(['streamhub-backbone', 'streamhub-scorecard'],
-  	function(Hub, View) {
-  			fyre.conv.load({network: "network.fyre.co"}, [{app: 'sdk'}], function(sdk) {
-  	    	var col = window.col = new Hub.Collection().setRemote({
-  	    		sdk: sdk,
-  					siteId: "12345",
-  					articleId: "article_1"
-  			});
+require.config({
+      baseUrl: 'components',
+      paths: {
+        jquery: 'jquery/jquery',
+        text: 'requirejs-text/text',
+        backbone: 'backbone/backbone',
+        underscore: 'underscore/underscore',
+        mustache: 'mustache/mustache',
+        isotope: 'isotope/jquery.isotope',
+        fyre: 'http://zor.t402.livefyre.com/wjs/v3.0/javascripts/livefyre',
+      },
+      packages: [ {
+        name: 'streamhub-backbone',
+        location: 'streamhub-backbone'
+      },
+      {
+        name: "streamhub-scorecard",
+        location: "streamhub-scorecard/src"
+      }],
+      shim: {
+        backbone: {
+            deps: ['underscore', 'jquery'],
+            exports: 'Backbone'
+        },
+        underscore: {
+            exports: '_'
+        },
+        isotope: {
+            deps: ['jquery']
+        },
+        fyre: {
+            exports: 'fyre'
+        },
+      }
+    });
+      
+      // Now to load the example
+      require(['streamhub-backbone', 'streamhub-scorecard'],
+      function(Hub, View) {
+              fyre.conv.load({network: "network.fyre.co"}, [{app: 'sdk'}], function(sdk) {
+              var col = window.col = new Hub.Collection().setRemote({
+                  sdk: sdk,
+                  siteId: "12345",
+                  articleId: "article_1"
+              });
             
-  			var view = new View({
-  				collection: col,
-  				el: document.getElementById("scorecard"),
-  			});
-  			view.render();
-  		});
-  	});
+              var view = new View({
+                  collection: col,
+                  el: document.getElementById("scorecard"),
+              });
+              view.render();
+          });
+      });
   <script>
   
   ...
