@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StreamHub Backbone Example</title>
+    <script src="lib/requirejs/require.js"
+    		data-main="requirejs.conf"
+            type="text/javascript"></script>
+    <script src="http://zor.t402.livefyre.com/wjs/v3.0.sdk/javascripts/livefyre.js"></script>
+    <style>
+    body {
+        color: #222;
+        font: 14px sans-serif;
+        line-height: 1.25;
+        background-color: #eee;
+    }
+    .hub-item {
+        background-color: white;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        margin: .25em;
+        cursor: pointer;
+    }
+    .sort-links a, .filter-links a {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+  <div id="container">
+    <h1>StreamHub Scorecard</h1>
+    <div id="example">
+    	<div class="score1">0</div>
+    	<div class="score2">0</div>
+    	<div class="quarter"></div>
+    </div>
+    <div>
+      User token: <input id='userToken' value=''></input><br/>
+      Score1: <input id='score1' /><br/>
+      Score2: <input id='score2' /><br/>
+      Quarter: <input id='quarter' /><br/>
+
+  	  <button id='postMessage'>Post</button><br/>
+  	  <span id='status'>NA</span>
+    </div>
+    
+  </div>
+  <script type="text/javascript">
+	// Now to load the example
+	require(['streamhub-backbone', 'streamhub-scorecard'],
+	function(Hub, View){
+	    function loadApp (sdk) {
+	    	
+	    	var col = window.col = new Hub.Collection().setRemote({
+	    		sdk: sdk,
+                siteId: "303827",
+                articleId: "gene_publish_score_0"
+            });
+	    	
+	        window.scoreboard = new View({
+	            collection: col,
+	            el: document.getElementById("example")
+	        });
+	        
+		    $('#postMessage').click(function() {
+		    	$('#status').text('Submitting...');
+		    	var message = ["score", $('#score1').val(), $('#score2').val(), $('#quarter').val(), Date.now()].join(' ');
+		    	col._sdkCollection.setUserToken($('#userToken').val());
+		    	col._sdkCollection.postContent({bodyHtml: message}, function() {
+		    		$('#status').text('Success: ' + JSON.stringify(arguments));
+		    		$('#newMessage').val('');
+		    	}, function() {
+		    		$('#status').text('Failed: ' + JSON.stringify(arguments));
+		    	});
+		    	return false;
+		    });
+
+	    }
+	    fyre.conv.load({
+	        network: "labs-t402.fyre.co"
+	    }, [{app: 'sdk'}], loadApp);
+	});
+  </script>
+</body>
+</html>
