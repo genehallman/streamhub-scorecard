@@ -3,9 +3,10 @@ define(function(require) {
 	var View = require('streamhub-scorecard');
 
 	return function(sdk, opts) {
-		document.getElementById(opts.elementId).innerHTML += "<div class='score1'>0</div>"+
-    		"<div class='score2'>0</div>"+
-    		"<div class='quarter'></div>";
+		document.getElementById(opts.elementId).innerHTML += [
+			"Score 1: <div class='score1'>0</div>",
+    		"Score 2: <div class='score2'>0</div>",
+    		"Quarter: <div class='quarter'></div>"].join('');
 		
         var col = window.col = new Hub.Collection().setRemote({
             sdk: sdk,
