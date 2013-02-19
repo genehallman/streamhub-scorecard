@@ -10,7 +10,7 @@ define(function(require) {
         var col = window.col = new Hub.Collection().setRemote({
             sdk: sdk,
             siteId: opts.siteId,
-            articleId: opts.articleId3
+            articleId: opts.articleId4
         });
 
 		var view = new View({
