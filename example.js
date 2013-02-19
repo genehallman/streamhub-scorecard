@@ -1,6 +1,6 @@
 define(function(require) {
 	var Hub = require('streamhub-backbone');
-	var View = require('streamhub-timeline');
+	var View = require('streamhub-scorecard');
 
 	return function(sdk, opts) {
 		document.getElementById(opts.elementId).innerHTML += "<div class='score1'>0</div>"+
