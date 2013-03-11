@@ -22,6 +22,7 @@ var Backbone = require('backbone'),
  *        item that contains the meta data for this content item. 
  */
 var ScorecardView = Backbone.View.extend(
+/** @lends ScorecardView.prototype */
 {
 	/**
 	 * Initializes a ScorecardView, and is called by backbone during view construction.
