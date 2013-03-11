@@ -24,12 +24,12 @@ var Backbone = require('backbone'),
 var ScorecardView = Backbone.View.extend(
 /** @lends ScorecardView.prototype */
 {
-	/**
-	 * Initializes a ScorecardView, and is called by backbone during view construction.
-	 * Binds to the collection's add event.
-	 * @param {Object.<string, *>} opts A set of options to configure this instance.
-	 * @protected
-	 */
+    /**
+     * Initializes a ScorecardView, and is called by backbone during view construction.
+     * Binds to the collection's add event.
+     * @param {Object.<string, *>} opts A set of options to configure this instance.
+     * @protected
+     */
     initialize: function (opts) {
         opts = opts || {};
         this._sourceOpts = opts.sources || {};
