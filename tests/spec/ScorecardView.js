@@ -1,9 +1,11 @@
 define([
-    'jasmine-jquery',
+    'jasmine',
     'streamhub-scorecard',
-    'streamhub-backbone',
-    '../MockHubCollection'],
-function (jasmine, ScorecardView, Hub, MockHubCollection) {
+    'streamhub-sdk',
+    'streamhub-sdk/streams',
+    '../MockStream',
+    'jasmine-jquery'],
+function (jasmine, ScorecardView, Hub, Streams, MockStream) {
 describe('A ScorecardView', function () {
     it ("can have tests run", function () {
         expect(true).toBe(true);
@@ -28,22 +30,22 @@ describe('A ScorecardView', function () {
     	});
     	it ("with only a Mock Hub.Collection", function () {
         	var view = new ScorecardView({
-            	collection: new MockHubCollection()
+            	streams: new Streams({main: new MockStream()})
         	});
     	    expect(view).toBeDefined();
     	});
 	    it ("with an el", function () {
 	        setFixtures('<div id="hub-ScorecardView"></div>');  
 	        var view = new ScorecardView({
-	            el: $('#hub-ScorecardView')
+	            el: $('#hub-ScorecardView').get(0)
 	        });
 	        expect(view).toBeDefined();
 	    });
 	    it ("with an el and Mock Hub.Collection", function () {
 	        setFixtures('<div id="hub-ScorecardView"></div>');  
 	        var view = new ScorecardView({
-	            collection: new MockHubCollection(),
-	            el: $('#hub-ScorecardView')
+	            streams: new Streams({main: new MockStream()}),
+	            el: $('#hub-ScorecardView').get(0)
 	        });
 	        expect(view).toBeDefined();
 	    });
@@ -62,28 +64,37 @@ describe('A ScorecardView', function () {
 		        '</div>'
 		    );
 	        view = new ScorecardView({
-	            collection: new MockHubCollection(),
-	            el: $('#hub-ScorecardView'),
+	            streams: new Streams({main: new MockStream()}),
+	            el: $('#hub-ScorecardView').get(0),
 	        });
 		});
         it ("should update with the latest score and quarter once .setRemote called", function () {
-        	view.collection.setRemote({});
-        	view.$el.stop(true, true);
-        	expect(view.$el.find('.score1').html()).toBe('8');
-        	expect(view.$el.find('.score2').html()).toBe('9');
-        	expect(view.$el.find('.quarter').html()).toBe('Quarter 10');
+        	var spy = jasmine.createSpy();
+        	view.on('add', spy);
+        	view.streams.start();
+        	
+        	waitsFor(function() {
+                return spy.callCount == 8;
+            });
+            runs(function() {
+	            view.$el.stop(true, true);
+	            expect(view.$el.find('.score1').html()).toBe('8');
+	            expect(view.$el.find('.score2').html()).toBe('9');
+	            expect(view.$el.find('.quarter').html()).toBe('Quarter 10');
+            });                   
+        	
         });
         it ("should only update score and not quarter if no quarter", function () {
-        	view.collection.add(view.collection._createMockContent());
-        	view.collection.add(view.collection._createMockContent('score 99 99 1234'));
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent());
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent('score 99 99 1234'));
         	view.$el.stop(true, true);
         	expect(view.$el.find('.score1').html()).toBe('99');
         	expect(view.$el.find('.score2').html()).toBe('99');
         	expect(view.$el.find('.quarter').html()).toBe('Quarter 3');
         });
         it ("should not update if the content is invalid", function () {
-        	view.collection.add(view.collection._createMockContent());
-        	view.collection.add(view.collection._createMockContent('sjsoj 1 2 text 1234'));
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent());
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent('sjsoj 1 2 text 1234'));
         	view.$el.stop(true, true);
         	expect(view.$el.find('.score1').html()).toBe('1');
         	expect(view.$el.find('.score2').html()).toBe('2');
@@ -91,8 +102,8 @@ describe('A ScorecardView', function () {
 
         });
         it ("should not update if the content is empty", function () {
-        	view.collection.add(view.collection._createMockContent());
-        	view.collection.add(view.collection._createMockContent(' '));
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent());
+        	view.streams.get('main')._push(view.streams.get('main')._createMockContent(' '));
         	view.$el.stop(true, true);
         	expect(view.$el.find('.score1').html()).toBe('1');
         	expect(view.$el.find('.score2').html()).toBe('2');

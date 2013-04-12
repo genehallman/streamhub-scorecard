@@ -1,5 +1,5 @@
 define(function(require) {
-	var Hub = require('streamhub-backbone');
+	var Hub = require('streamhub-sdk');
 	var View = require('streamhub-scorecard');
 
 	return function(sdk, opts) {
@@ -8,18 +8,10 @@ define(function(require) {
     		"Score 2: <div class='score2'>0</div>",
     		"Quarter: <div class='quarter'></div>"].join('');
 		
-        var col = window.col = new Hub.Collection().setRemote({
-            sdk: sdk,
-            siteId: opts.siteId,
-            articleId: opts.articleId4
-        });
-
 		var view = new View({
-			collection: col,
+			streams: Hub.Streams.forCollection($.extend({}, opts, {articleId: opts.articleId1})).start()
 			el: document.getElementById(opts.elementId),
 		});
-
-        view.render();
         
         return view;
     };
