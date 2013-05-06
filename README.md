@@ -36,7 +36,7 @@ $ bower install git://github.com/genehallman/streamhub-scorecard.git
 #### Use via Require.js
 Once you've called bower install, you'll have a suite of components available to you in the ```./components``` directory. These can be accessed via Require.js, as shown below.
 
-```
+<pre>
   <div id="scorecard">
       <div class="score1"></div>
       <div class="score2"></div>
@@ -49,7 +49,7 @@ Once you've called bower install, you'll have a suite of components available to
   
   <script type="text/javascript">
 
-require.config({
+  require.config({
       baseUrl: 'components',
       paths: {
         jquery: 'jquery/jquery',
@@ -103,4 +103,4 @@ require.config({
           });
       });
   <script>  
-```
+</pre>
