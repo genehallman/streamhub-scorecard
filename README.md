@@ -13,10 +13,10 @@ The score boxes are identified by the cssClass ```score1``` & ```score2```, and 
 ## To run the example site:
 
 ```
-$ git clone git@github.com:genehallman/streamhub-scorecard.git
-$ cd streamhub-scorecard
-$ npm install
-$ npm start
+  $ git clone git@github.com:genehallman/streamhub-scorecard.git
+  $ cd streamhub-scorecard
+  $ npm install
+  $ npm start
 ```
 
 + To see the demo, browse to [localhost:8080](http://localhost:8080)
