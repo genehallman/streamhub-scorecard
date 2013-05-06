@@ -2,13 +2,7 @@
 
 streamhub-scorecard is a StreamHub-SDK plugin that uses a stream of content items to power a scoreboard.
 
-## Prerequisites:
-+ [npm](http://npmjs.org/)
-
-## Documentation:
-View the [API documentation](http://htmlpreview.github.com/?https://github.com/genehallman/streamhub-scorecard/blob/master/docs/index.html).
-
-### Streamhub Views:
+## Views:
 The streamhub-scorecard comes with ```ScorecardView```, a view for use with Livefyre's Streamhub. 
 It uses the stream's content items' bodyHtml to power a scoreboard unit, useful for live game score broadcasting.
 The text must be in the format ```"score <score1> <score2> <quarter text> <datestamp>"``` where score1 and score2 are numbers
@@ -42,7 +36,7 @@ $ bower install git://github.com/genehallman/streamhub-scorecard.git
 #### Use via Require.js
 Once you've called bower install, you'll have a suite of components available to you in the ```./components``` directory. These can be accessed via Require.js, as shown below.
 
-```
+<code>
   ...
   <div id="scorecard">
       <div class="score1"></div>
@@ -112,4 +106,4 @@ require.config({
   <script>
   
   ...
-```
+</code>
