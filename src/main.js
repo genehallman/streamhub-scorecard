@@ -1,5 +1,3 @@
-/** @module ScorecardView */
-
 define(function(require) {
     var View = require('streamhub-sdk/view');
 
@@ -9,7 +7,6 @@ define(function(require) {
 	 * "score <score1> <score2> <quarter text> <datestamp>" where score1 and score2 are numbers for the
 	 * score boxes and anything after that (separated by a space) will be used for the quarter text,
 	 * before the last item, the datestamp, which is just used for cache busting streamhub.
-	 * @alias module:ScorecardView
 	 * @constructor
 	 * @param {Object.<string, *>} opts A set of options to configure this instance.
 	 * @param {string} opts.metaElement The selector of an element inside the bodyHtml of each content
