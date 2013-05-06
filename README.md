@@ -1,10 +1,6 @@
 # streamhub-scorecard
 
-streamhub-scorecard is a StreamHub (Backbone) plugin that uses a stream of content items to power a scoreboard.
-
-![streamhub-scorecard screenshot](https://drive.google.com/uc?id=0BwAX440-rUypWEVaMkkwYjltUEk "streamhub-scorecard screenshot")
-
-Learn more about [StreamHub-Backbone](http://github.com/gobengo/streamhub-backbone)
+streamhub-scorecard is a StreamHub-SDK plugin that uses a stream of content items to power a scoreboard.
 
 ## Prerequisites:
 + [npm](http://npmjs.org/)
