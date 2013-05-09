@@ -3,7 +3,7 @@ define(function(require) {
 	var View = require('streamhub-scorecard');
 
 	return function(el) {
-		document.getElementById(opts.elementId).innerHTML += [
+		el.innerHTML += [
 			"Score 1: <div class='score1'>0</div>",
     			"Score 2: <div class='score2'>0</div>",
     			"Quarter: <div class='quarter'></div>"].join('');
