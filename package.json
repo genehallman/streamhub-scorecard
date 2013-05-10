@@ -18,6 +18,10 @@
     "start": "./node_modules/http-server/bin/http-server"
   },
   "streamhub": {
-    "sampleImages": ["http://superbowl.livefyre.com/images/scoreboard-screenshot.png"]
+    "sampleImages": [
+      "http://superbowl.livefyre.com/images/scoreboard-screenshot.png",
+      "https://drive.google.com/uc?id=0BwAX440-rUypanZNSnpuU0NRRWs",
+      "https://drive.google.com/uc?id=0BwAX440-rUypaXlmWi1QdC1mODA"
+    ]
   }
 }
