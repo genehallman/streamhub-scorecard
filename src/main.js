@@ -4,7 +4,7 @@ define(function(require) {
 	/**
 	 * ScorecardView is a view that uses streamhub data to populate it's child elements.
 	 * It reads the bodyHtml of each item and trys to match the format
-	 * "score <score1> <score2> <quarter text> <datestamp>" where score1 and score2 are numbers for the
+	 * "score -score1- -score2- -quarter text- -datestamp-" where score1 and score2 are numbers for the
 	 * score boxes and anything after that (separated by a space) will be used for the quarter text,
 	 * before the last item, the datestamp, which is just used for cache busting streamhub.
 	 * @constructor
