@@ -25,14 +25,14 @@ The score boxes are identified by the cssClass ```score1``` & ```score2```, and 
 ## To install on your site:
 The easiest way to use the streamhub-scorecard is to install it via [bower](http://twitter.github.com/bower/) and [requirejs](http://requirejs.org/):
 
-#### Install via Bower
+### Install via Bower
 Bower can be used to automatically download streamhub-scorecard and its dependency tree.
 
 ```
 $ bower install git://github.com/genehallman/streamhub-scorecard.git
 ```
 
-#### Use via Require.js
+### Use via Require.js
 Once you've called bower install, you'll have a suite of components available to you in the ```./components``` directory. These can be accessed via Require.js, as shown below.
 
     <div id="scorecard">
