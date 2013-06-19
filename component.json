@@ -8,15 +8,13 @@
     "streamhub-sdk": "git://github.com/Livefyre/streamhub-sdk.git#~v1.0.1"
   },
   "streamhub": {
-    "icon": "http://superbowl.livefyre.com/images/scoreboard-screenshot.png",
-    "iconHover": "http://superbowl.livefyre.com/images/scoreboard-screenshot.png",
-    "background": "http://superbowl.livefyre.com/images/scoreboard-screenshot.png",
+    "icon": "https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-thumbbigHF-302x227.png",
+    "iconHover": "https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-thumbbigLF-302x227.png",
+    "background": "https://raw.github.com/genehallman/streamhub-scorecard/master/images/appgallery-scoreboard-v1.jpg",
     "sampleImages": [
-      "https://drive.google.com/uc?id=0BwAX440-rUypanZNSnpuU0NRRWs",
-      "https://drive.google.com/uc?id=0BwAX440-rUypaXlmWi1QdC1mODA",
-      "https://drive.google.com/uc?id=0BwAX440-rUypNzhqZXN1SDU4aG8",
-      "https://drive.google.com/uc?id=0BwAX440-rUypam1HcVZqZTY2eXc",
-      "https://drive.google.com/uc?id=0BwAX440-rUypeldPcHBsRE0wblU"
+      "https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-thumbprev-700x525_1.png",
+      "https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-thumbprev-700x525_2.png",
+      "https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-thumbprev-700x525_3.png"
     ]
   }
 }
