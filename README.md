@@ -1,102 +1,87 @@
 # streamhub-scorecard
 
-streamhub-scorecard is a StreamHub-SDK plugin that uses a stream of content items to power a scoreboard.
+A StreamHub App that can power a real-time scoreboard of a live sporting event.
 
-## Views:
-The streamhub-scorecard plugin comes with ```ScorecardView```, a view for use with Livefyre's Streamhub. 
-It uses the stream's content items' bodyHtml to power a scoreboard unit, useful for live game score broadcasting.
-The text must be in the format ```"score <score1> <score2> <quarter text> <datestamp>"``` where score1 and score2 are numbers
-for the score boxes and anything after that (separated by a space) and before the datestamp will be used for the quarter text.
-The datestamp is just used for cache busting streamhub.
-The score boxes are identified by the cssClass ```score1``` & ```score2```, and the quarter by ```quarter```.
+## Getting Started
 
-## To run the example site:
+The quickest way to use streamhub-scorecard is to use the built version hosted on Livefyre's CDN.
 
-    $ git clone git@github.com:genehallman/streamhub-scorecard.git
-    $ cd streamhub-scorecard
-    $ npm install
-    $ npm start
+### Dependencies
 
+TODO: UPDATE THIS AFTER GENE MERGES CODE CHANGES AND APP GALLERY CAN BUILD THIS
 
-+ To see the demo, browse to [localhost:8080](http://localhost:8080)
-+ To run the tests, browse to [localhost:8080/tests/index.html](http://localhost:8080/tests/index.html)
-+ To see the docs, browse to [localhost:8080/docs/index.html](http://localhost:8080/docs/index.html)
+streamhub-scorecard depends on [streamhub-sdk](https://github.com/livefyre/streamhub-sdk). Ensure it's been included in your page.
 
-## To install on your site:
-The easiest way to use the streamhub-scorecard is to install it via [bower](http://twitter.github.com/bower/) and [requirejs](http://requirejs.org/):
+	<script src="http://cdn.livefyre.com/libs/sdk/v1.0.1-build.147/streamhub-sdk.min.gz.js"></script>
 
-### Install via Bower
-Bower can be used to automatically download streamhub-scorecard and its dependency tree.
+Include streamhub-scorecard too.
 
-```
-$ bower install git://github.com/genehallman/streamhub-scorecard.git
-```
+	<script src="http://cdn.livefyre.com/libs/apps/genehallman/streamhub-scorecard/v0.0.0-build.20/streamhub-wall.min.js"></script>
+	
+Optionally, include some reasonable default CSS rules for StreamHub Content
 
-### Use via Require.js
-Once you've called bower install, you'll have a suite of components available to you in the ```./components``` directory. These can be accessed via Require.js, as shown below.
+    <link rel="stylesheet" href="http://cdn.livefyre.com/libs/sdk/v1.0.1-build.147/streamhub-sdk.gz.css" />
 
-    <div id="scorecard">
-      <div class="score1"></div>
-      <div class="score2"></div>
-      <div class="quarter"></div>
-    </div>
-    <!-- Get requirejs -->
-    <script src="components/requirejs/require.js" type="text/javascript"></script>
-    <!-- Get Livefyre sdk loader -->
-    <script src="http://zor.t402.livefyre.com/wjs/v3.0.sdk/javascripts/livefyre.js"></script>
+### Usage
 
-    <script type="text/javascript">
+1. Add some HTML to your page for streamhub-scorecard to render in. This element should have descendant elements with classes `score1` and `score2` for scores, and `quarter` to display the quarter text or time remaining in the game.
 
-    require.config({
-      baseUrl: 'components',
-      paths: {
-        jquery: 'jquery/jquery',
-        text: 'requirejs-text/text',
-        backbone: 'backbone/backbone',
-        underscore: 'underscore/underscore',
-        mustache: 'mustache/mustache',
-        isotope: 'isotope/jquery.isotope',
-        fyre: 'http://zor.t402.livefyre.com/wjs/v3.0/javascripts/livefyre',
-      },
-      packages: [ {
-        name: 'streamhub-backbone',
-        location: 'streamhub-backbone'
-      },
-      {
-        name: "streamhub-scorecard",
-        location: "streamhub-scorecard/src"
-      }],
-      shim: {
-        backbone: {
-          deps: ['underscore', 'jquery'],
-          exports: 'Backbone'
-        },
-        underscore: {
-          exports: '_'
-        },
-        isotope: {
-          deps: ['jquery']
-        },
-        fyre: {
-          exports: 'fyre'
-        },
-      }
-    });
-      
-    // Now to load the example
-    require(['streamhub-backbone', 'streamhub-scorecard'], function(Hub, View) {
-      fyre.conv.load({network: "network.fyre.co"}, [{app: 'sdk'}], function(sdk) {
-        var col = window.col = new Hub.Collection().setRemote({
-            sdk: sdk,
-            siteId: "12345",
-            articleId: "article_1"
+        <div id="scoreboard">
+        <p>Team A<span class="score1"></span></p>
+        <p>Team B<span class="score2"></span></p>
+        <p class="quarter"></p>
+        </div>
+
+1. Require streamhub-sdk and streamhub-scorecard
+
+        var Hub = Livefyre.require('streamhub-sdk'),
+            ScoreView = Livefyre.require('streamhub-scorecard');
+    
+2. Create a ScoreView, passing the DOMElement to render in
+
+        var scoreView = new ScoreView({
+            el: document.getElementById('scoreboard')
         });
-              
-        var view = new View({
-            collection: col,
-            el: document.getElementById("scorecard"),
+    
+3. Get scores from StreamHub by creating a StreamManager for a Livefyre Collection.
+
+    This Collection must be filled with Content of the form ```"score <score1> <score2> <quarter text> <datestamp>"``` where `score1` and `score2` are numbers
+for the score boxes, `quarter text` is the quarter and/or time remaining, and `datestamp` is an integer Unix timestamp.
+
+
+        var streamManager = Hub.StreamManager.create.livefyreStreams({
+            network: "labs.fyre.co",
+            siteId: 315833,
+            articleId: 'example'
         });
-        view.render();
-      });
-    });
-    <script>
+    
+4. And bind the streamManager to your scoreboard and start it up
+
+        streamManager.bind(scoreView).start();
+
+You now have a real-time scoreboard! See this all in action on [this jsfiddle](http://jsfiddle.net/59sT9/).
+
+## Local Development
+
+Instead of using a built version of streamhub-scorecard from Livefyre's CDN, you may wish to fork, develop on the repo locally, or include it in your existing JavaScript application.
+
+Clone this repo
+
+    git clone https://github.com/genehallman/streamhub-scorecard
+
+Development dependencies are managed by [npm](https://github.com/isaacs/npm), which you should install first.
+
+With npm installed, install streamhub-scorecard dependencies. This will also download [Bower](https://github.com/bower/bower) and use it to install browser dependencies.
+
+    cd streamhub-scorecard
+    npm install
+
+This repository's package.json includes a helpful script to launch a web server for development
+
+    npm start
+
+You can now visit [http://localhost:8080/](http://localhost:8080/) to see an example scoreboard loaded via RequireJS.
+
+# StreamHub
+
+[Livefyre StreamHub](http://www.livefyre.com/streamhub/) is used by the world's biggest brands and publishers to power their online Content Communities. StreamHub turns your site into a real-time social experience. Curate images, videos, and Tweets from across the social web, right into live blogs, chats, widgets, and dashboards. Want StreamHub? [Contact Livefyre](http://www.livefyre.com/contact/).
