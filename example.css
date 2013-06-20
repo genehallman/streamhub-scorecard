@@ -1,3 +1,9 @@
 .score1, .score2, .quarter {
 	font-style: italic;
 }
+
+#example {
+    background: url(https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-sf.png) center center;
+    height: 120px;
+    width: 910px;
+}
