@@ -8,15 +8,13 @@ The quickest way to use streamhub-scorecard is to use the built version hosted o
 
 ### Dependencies
 
-TODO: UPDATE THIS AFTER GENE MERGES CODE CHANGES AND APP GALLERY CAN BUILD THIS
-
 streamhub-scorecard depends on [streamhub-sdk](https://github.com/livefyre/streamhub-sdk). Ensure it's been included in your page.
 
 	<script src="http://cdn.livefyre.com/libs/sdk/v1.0.1-build.147/streamhub-sdk.min.gz.js"></script>
 
 Include streamhub-scorecard too.
 
-	<script src="http://cdn.livefyre.com/libs/apps/genehallman/streamhub-scorecard/v0.0.0-build.20/streamhub-wall.min.js"></script>
+	<script src="http://cdn.livefyre.com/libs/apps/genehallman/streamhub-scorecard/v2.0.0-build.2/streamhub-scorecard.min.js"></script>
 	
 Optionally, include some reasonable default CSS rules for StreamHub Content
 
@@ -27,9 +25,9 @@ Optionally, include some reasonable default CSS rules for StreamHub Content
 1. Add some HTML to your page for streamhub-scorecard to render in. This element should have descendant elements with classes `score1` and `score2` for scores, and `quarter` to display the quarter text or time remaining in the game.
 
         <div id="scoreboard">
-        <p>Team A<span class="score1"></span></p>
-        <p>Team B<span class="score2"></span></p>
-        <p class="quarter"></p>
+            <p>Team A<span class="score1"></span></p>
+            <p>Team B<span class="score2"></span></p>
+            <p class="quarter"></p>
         </div>
 
 1. Require streamhub-sdk and streamhub-scorecard
@@ -52,14 +50,14 @@ for the score boxes, `quarter text` is the quarter and/or time remaining, and `d
         var streamManager = Hub.StreamManager.create.livefyreStreams({
             network: "labs.fyre.co",
             siteId: 315833,
-            articleId: 'example'
+            articleId: 'scorecard_example'
         });
     
 4. And bind the streamManager to your scoreboard and start it up
 
         streamManager.bind(scoreView).start();
 
-You now have a real-time scoreboard! See this all in action on [this jsfiddle](http://jsfiddle.net/59sT9/).
+You now have a real-time scoreboard! See this all in action on [this jsfiddle](http://jsfiddle.net/cU4m6/1/).
 
 ## Local Development
 
