@@ -11,16 +11,15 @@
 	border-radius: 4px;
 	font-family: tahoma;
 	font-size: 60px;
-    top: 23px;
+    top: 15px;
     letter-spacing: 11px;
 }
 .score1 {
-	left: 293px;
+	left: 283px;
 }
 
 .score2 {
-    left: 481px;
-    letter-spacing: 11px;
+    left: 475px;
 }
 
 .quarter {
@@ -35,7 +34,9 @@
 }
 
 #example {
-    background: url(https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-sf.png) center center no-repeat;
-    height: 120px;
+    background: url(https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-sf.png) center top no-repeat;
+    min-height: 180px;
     width: 910px;
+    position:relative;
+    line-height:normal;
 }
