@@ -51,13 +51,12 @@ define([
                     parts.pop(); // popping "date time" from end, for cache busting
                     var quarterText = parts.join(' ');
     
-                    this.$el.stop(true, true);
-                    this.$el.fadeOut(function() {
+                    this.$el.fadeOut('fast', function() {
                         score1.html(s1);
                         score2.html(s2);
                         if (quarterText.length != 0) { quarterEl.html(quarterText); }
                         
-                        self.$el.fadeIn(function() {
+                        self.$el.fadeIn('fast', function() {
                             self.$el.css('opacity', '1');
                         });
                     });
