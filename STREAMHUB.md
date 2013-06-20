@@ -1,8 +1,18 @@
 # streamhub-scorecard
 
-streamhub-scorecard is a StreamHub-SDK plugin that uses a stream of content items to power a scoreboard.
+Show fans a real-time scoreboard of a live sporting event.
 
-The streamhub-scorecard plugin comes with ```ScorecardView```, a view for use with Livefyre's Streamhub. 
-It uses the stream's content items' bodyHtml to power a scoreboard unit, useful for live game score broadcasting.
-The text must be in the format ```"score <score1> <score2> <quarter text> <datestamp>"``` where score1 and score2 are numbers
-for the score boxes and anything after that (separated by a space) and before the datestamp will be used for the quarter text.
+## Features
+
+* Scores and game period labels update in real-time
+* Customizable scoreboard look & feel
+
+## See it in Action
+
+streamhub-scorecard was created for [Livefyre's SocialHub for fans of Super Bowl 2013](http://superbowl.livefyre.com). Along with play-by-play tickers, media walls, and social streams for each commercial, the header of each page featured a real-time scorebard.
+
+## Usage
+
+streamhub-scorecard is an embeddable JavaScript application that runs in any HTML5-compatible browser, including mobile devices and tablets. The included Developer Documentation explains the API to instantiate a MediaWall and stream in new updates based on Content from a StreamHub Collection.
+
+StreamHub Apps require a [Livefyre StreamHub](http://www.livefyre.com/streamhub/) subscription to power Curation, Collection, Content storage, and real-time syndication. To inquire about subscribing to StreamHub, [contact](mailto:sales@livefyre.com) Livefyre.
