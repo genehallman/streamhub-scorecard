@@ -45,12 +45,12 @@
   </div>
   <script type="text/javascript">
     // Now to load the example
-    require(['streamhub-sdk', 'streamhub-scorecard'], function(Hub, View) {
+    require(['streamhub-sdk', 'streamhub-scorecard', 'streamhub-zepto'],
+    function(Hub, View, $) {
         var opts = {
-            network: "labs-t402.fyre.co",
-            siteId: "303827",
-            articleId: "gene_publish_score_0", 
-            environment: "t402.livefyre.com"
+            network: "labs.fyre.co",
+            siteId: "315833",
+            articleId: "scorecard_example"
         };
 
         var view = window.scoreboard = new View({
