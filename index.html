@@ -54,24 +54,24 @@
         };
 
         var view = window.scoreboard = new View({
-            streams: Hub.Streams.forCollection(opts).start(),
             el: document.getElementById("example")
         });
+
+        var streamManager = Hub.StreamManager.create.livefyreStreams(opts);
+        streamManager.bind(view).start();
 
         $('#postMessage').click(function() {
             $('#status').text('Submitting...');
             var message = ["score", $('#score1').val(), $('#score2').val(), $('#quarter').val(), Date.now()].join(' ');
-            view.streams.get('main').write({
-                lftoken: $('#userToken').val(),
-                body: message, 
-                callback: function(err, data) {
-                     if (err) {
-                         $('#status').text('Failed: ' + JSON.stringify(data));
-                     } else {
-                         $('#status').text('Success: ' + JSON.stringify(data));
-                         $('#newMessage').val('');
-                     }
-                 }
+            streamManager.get().main.write(new Hub.Content(message), {
+              lftoken: $('#userToken').val()
+            }, function (err, data) {
+              if (err) {
+                $('#status').text('Failed: ' + JSON.stringify(data));
+              } else {
+                  $('#status').text('Success: ' + JSON.stringify(data));
+                  $('#newMessage').val('');
+              }
             });
              
             return false;
