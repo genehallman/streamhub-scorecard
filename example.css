@@ -1,9 +1,41 @@
-.score1, .score2, .quarter {
-	font-style: italic;
+.score1, .score2 {
+	position: absolute;
+	background-color: black;
+	padding: 9px;
+    padding-right: 5px;
+    padding-left: 17px;
+    color: white;
+	display: block;
+	width: 130px;
+	text-align: center;
+	border-radius: 4px;
+	font-family: tahoma;
+	font-size: 60px;
+    top: 23px;
+    letter-spacing: 11px;
+}
+.score1 {
+	left: 293px;
+}
+
+.score2 {
+    left: 481px;
+    letter-spacing: 11px;
+}
+
+.quarter {
+    left: 305px;
+    top: 130px;
+    color: #ccc;
+    font-size: 30px;
+    width: 300px;
+    text-align: center;
+    font-family: tahoma;
+    position:absolute;
 }
 
 #example {
-    background: url(https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-sf.png) center center;
+    background: url(https://raw.github.com/genehallman/streamhub-scorecard/master/images/scoreboard-sf.png) center center no-repeat;
     height: 120px;
     width: 910px;
 }

@@ -43,7 +43,7 @@ define(function(require) {
 		innerEl.innerHTML = [
 			"<div class='score1'>0</div>",
     		"<div class='score2'>0</div>",
-    		"<div class='quarter'></div>"].join('');
+    		"<div class='quarter'>Quarter 1</div>"].join('');
 		
 		el.appendChild(innerEl);
 		
