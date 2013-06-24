@@ -32,7 +32,6 @@ define(function(require) {
 	        var content = new Hub.Content(["score", self.score1, self.score2, "Quarter", self.quarter, Date.now()].join(" "));
 	        content.meta = {event: Date.now()};
 	        self._push(content);
-	        console.log('here', self);
         }, 1500);
     };
     

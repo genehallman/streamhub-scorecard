@@ -1,6 +1,6 @@
 define([
     'streamhub-sdk/view',
-    'streamhub-zepto'
+    'jquery'
 ], function(View, $) {
     /**
      * ScorecardView is a view that uses streamhub data to populate it's child elements.
